@@ -4,6 +4,7 @@ from flask import redirect, render_template, request, session
 from werkzeug.security import check_password_hash, generate_password_hash
 import config
 import db
+import movies
 
 app = Flask(__name__)
 app.secret_key = config.secret_key
@@ -24,8 +25,7 @@ def create_movie():
     description = request.form["description"]
     user_id = session["user_id"]
 
-    sql = """INSERT INTO movies (title, director, release_date, description, user_id) VALUES (?, ?, ?, ?, ?)"""
-    db.execute(sql, [title, director, release_date, description, user_id])
+    movies.add_new_movie(title, director, release_date, description, user_id)
 
     return redirect("/")
 
