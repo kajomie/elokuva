@@ -10,7 +10,7 @@
   {% if session.username %}
   <p>
     Tervetuloa Elokuvasovellukseen!<br>
-    Olet kirjautunut sisään tunnuksella {{ session.username }}
+    Olet kirjautunut sisään tunnuksella <b>{{ session.username }}</b>
   </p>
     {% endif %}
 
@@ -21,13 +21,14 @@
   </p>
 
   <p>
+    <a href="/search_movie"><button>Hae elokuvia</button></a><br><br>
     <a href="/add_movie"><button>Lisää elokuva</button></a>
   </p>
   <br>
   <h2><u>Elokuvat</u></h2>
   <ul>
     {% for movie in movies %}
-    <li><a href="/movie/{{ movie.id }}">{{ movie.title }}</a></li>
+    <li><a href="/movie/{{ movie.id }}">{{ movie.title }} ({{ movie.release_date }})</a></li>
     {% endfor %}
   </ul>
 </body>

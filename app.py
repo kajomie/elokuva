@@ -33,10 +33,11 @@ def create_movie():
 
     res = movies.see_if_movie_exists(title)
 
-    if not res:
-        movies.add_new_movie(title, director, release_date, description, user_id)
-    else:
-        return "Elokuva on jo lisätty!"
+    if "confirm_add" in request.form:
+        if not res:
+            movies.add_new_movie(title, director, release_date, description, user_id)
+        else:
+            return "Elokuva on jo lisätty!"
 
     return redirect("/")
 
@@ -70,6 +71,16 @@ def remove_movie(movie_id):
             return redirect("/")
 
         return redirect("/movie/" + str(movie_id))
+
+@app.route("/search_movie")
+def search_movie():
+    query = request.args.get("query")
+    if not query:
+        query = ""
+        res = []
+    else:
+        res = movies.search_movies(query)
+    return render_template("search_movie.html", query=query, res=res)
 
 @app.route("/register")
 def register():

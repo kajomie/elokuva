@@ -5,7 +5,7 @@ def add_new_movie(title, director, release_date, description, user_id):
     db.execute(sql, [title, director, release_date, description, user_id])
 
 def get_movies():
-    sql = "SELECT id, title FROM movies ORDER BY title"
+    sql = "SELECT id, title, release_date FROM movies ORDER BY title"
     return db.query(sql)
 
 def get_movie(movie_id):
@@ -41,3 +41,10 @@ def update_movie(movie_id, title, director, release_date, description):
 def remove_movie(movie_id):
     sql = "DELETE FROM movies WHERE id = ?"
     db.execute(sql, [movie_id])
+
+def search_movies(query):
+    sql = """SELECT id, title, director, release_date
+            FROM movies
+            WHERE title LIKE ? OR director LIKE ?
+            ORDER BY title"""
+    return db.query(sql, ["%" + query + "%", "%" + query + "%"])

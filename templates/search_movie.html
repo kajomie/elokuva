@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Elokuvasovellus</title>
+</head>
+
+<body>
+    <h1>Elokuvasovellus</h1>
+    <h2><u>Hae elokuvia</u></h2>
+    <form action="/search_movie" method="get">
+        <p>
+        Haku:
+        <br>
+        <input type="text" name="query" size="30" placeholder="Etsi elokuvan tai ohjaajan nimellä" value="{{ query }}">
+        </p>
+        <input type="submit" value="Tee haku">
+    </form>
+
+    {% if query %}
+    <br>
+    <h2><u>Haun tulokset</u></h2>
+    <p>Haulla '<i>{{ query }}</i>' löytyi yhteensä {{ res | length }} tulosta.</p>
+    <ul>
+        {% for movie in res %}
+        <li><a href="/movie/{{ movie.id }}">{{ movie.title }} ({{ movie.release_date }}), dir. {{ movie.director }}</a></li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    <p>
+    <br>
+        <a href="/">Takaisin etusivulle</a>
+    </p>
+</body>
+
+</html>

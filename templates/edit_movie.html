@@ -10,19 +10,19 @@
     <h3><u>Muokkaa elokuvan tietoja</u></h3>
   <form action="/update_movie" method="post">
     <p>
-      Nimi: <br />
+      <b>Nimi:</b><br />
       <input type="text" name="title" value="{{ movie.title }}" />
     </p>
     <p>
-      Ohjaaja: <br />
+      <b>Ohjaaja:</b><br />
       <input type="text" name="director" value="{{ movie.director }}" />
     </p>
     <p>
-      Valmistumisvuosi: <br />
+      <b>Valmistumisvuosi:</b><br />
       <input type="text" name="release_date" size="6" value="{{ movie.release_date }}" />
     </p>
     <p>
-      Kuvaus: <br />
+      <b>Kuvaus:</b><br />
       <textarea name="description" rows="14" cols="65">{{ movie.description }}</textarea>
     </p>
     <input type="hidden" name="movie_id" value="{{ movie.id }}" />
@@ -30,7 +30,7 @@
     <input type="submit" name="save_edit" value="Tallenna muutokset" />
   </form>
     <p>
-        <a href="/">Takaisin etusivulle</a>
+      <a href="/">Takaisin etusivulle</a>
     </p>
 </body>
 
