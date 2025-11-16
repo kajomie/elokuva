@@ -9,10 +9,12 @@ def get_movies():
     return db.query(sql)
 
 def get_movie(movie_id):
-    sql = """SELECT movies.title,
+    sql = """SELECT movies.id,
+            movies.title,
             movies.director,
             movies.release_date,
             movies.description,
+            users.id user_id,
             users.username
         FROM movies, users
         WHERE movies.user_id = users.id AND
@@ -27,3 +29,11 @@ def see_if_movie_exists(title):
         return True
 
     return False
+
+def update_movie(movie_id, title, director, release_date, description):
+    sql = """UPDATE movies SET title = ?,
+                            director = ?,
+                            release_date = ?,
+                            description = ?
+                            WHERE id = ?"""
+    db.execute(sql, [title, director, release_date, description, movie_id])

@@ -8,14 +8,21 @@
 <body>
     <h1>Elokuvasovellus</h1>
     <h2><u> {{ movie.title }} </u></h2>
+
+    {% if session.user_id == movie.user_id %}
     <p>
-        Ohjaaja: {{ movie.director }}
+    <a href="/edit_movie/{{ movie.id }}">Muokkaa elokuvan tietoja</a>
+    </p>
+    {% endif %}
+
+    <p>
+        <b>Ohjaaja: </b> {{ movie.director }}
     </p>
     <p>
-        Valmistumisvuosi: {{ movie.release_date }}
+        <b>Valmistumisvuosi: </b> {{ movie.release_date }}
     </p>
     <p>
-        {{ movie.description }}
+        <b>Kuvaus: </b> {{ movie.description }}
     </p>
     <p>     
         Elokuvan lisäsi käyttäjä {{ movie.username }}
