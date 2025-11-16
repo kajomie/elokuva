@@ -11,7 +11,13 @@ app.secret_key = config.secret_key
 
 @app.route("/")
 def index():
-    return render_template("index.html")
+    all_movies = movies.get_movies()
+    return render_template("index.html", movies=all_movies)
+
+@app.route("/movie/<int:movie_id>")
+def show_movie(movie_id):
+    movie = movies.get_movie(movie_id)
+    return render_template("show_movie.html", movie=movie)
 
 @app.route("/add_movie")
 def add_movie():
@@ -25,7 +31,12 @@ def create_movie():
     description = request.form["description"]
     user_id = session["user_id"]
 
-    movies.add_new_movie(title, director, release_date, description, user_id)
+    res = movies.see_if_movie_exists(title)
+    
+    if res is None:
+        movies.add_new_movie(title, director, release_date, description, user_id)
+    else:
+        return "Elokuva on jo lisätty!"
 
     return redirect("/")
 

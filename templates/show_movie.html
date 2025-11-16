@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>{{ movie.title }}</title>
+</head>
+
+<body>
+    <h1>Elokuvasovellus</h1>
+    <h2><u> {{ movie.title }} </u></h2>
+    <p>
+        Ohjaaja: {{ movie.director }}
+    </p>
+    <p>
+        Valmistumisvuosi: {{ movie.release_date }}
+    </p>
+    <p>
+        {{ movie.description }}
+    </p>
+    <p>     
+        Elokuvan lisäsi käyttäjä {{ movie.username }}
+    </p>
+    <br>
+    <p>
+        <a href="/">Takaisin etusivulle</a>
+    </p>
+</body>
+
+</html>

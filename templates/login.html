@@ -6,9 +6,10 @@
 </head>
 
 <body>
+  <h1>Elokuvasovellus</h1>
   {% if session.username %}
   <p>
-    Olet kirjautunut nimellä {{ session.username }}
+    Olet kirjautunut sisään tunnuksella {{ session.username }}
   </p>
   <p>
     <a href="/logout">Kirjaudu ulos</a>
@@ -26,6 +27,9 @@
     <input type="submit" value="Kirjaudu" />
   </form>
   {% endif %}
+    <p>
+        <a href="/">Takaisin etusivulle</a>
+    </p>
 </body>
 
 </html>

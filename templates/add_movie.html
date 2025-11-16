@@ -6,7 +6,8 @@
 </head>
 
 <body>
-    <h1>Lisää elokuva</h1>
+    <h1>Elokuvasovellus</h1>
+    <h2><u>Lisää elokuva</u></h2>
   <form action="/create_movie" method="post">
     <p>
       Nimi: <br />
@@ -18,14 +19,17 @@
     </p>
     <p>
       Valmistumisvuosi: <br />
-      <input type="text" name="release_date" size="8" />
+      <input type="text" name="release_date" size="6" />
     </p>
     <p>
       Kuvaus: <br />
-      <textarea name="description" rows="8" cols="60"></textarea>
+      <textarea name="description" rows="14" cols="65"></textarea>
     </p>
     <input type="submit" value="Lisää elokuva" />
   </form>
+    <p>
+        <a href="/">Takaisin etusivulle</a>
+    </p>
 </body>
 
 </html>

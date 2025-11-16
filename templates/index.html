@@ -9,19 +9,27 @@
   <h1>Elokuvasovellus</h1>
   {% if session.username %}
   <p>
-    Olet kirjautunut nimellä {{ session.username }}, ja id-numerosi on {{ session.user_id }}
+    Tervetuloa Elokuvasovellukseen!<br>
+    Olet kirjautunut sisään tunnuksella {{ session.username }}
   </p>
     {% endif %}
 
   <p>
-    <a href="/login">Kirjaudu sisään</a>
-    <a href="/register">Luo tunnus</a>
+    <a href="/login">Kirjaudu sisään</a><br>
+    <a href="/register">Luo tunnus</a><br>
     <a href="/logout">Kirjaudu ulos</a>
   </p>
 
   <p>
-    <a href="/add_movie">Lisää elokuva</a>
+    <a href="/add_movie"><button>Lisää elokuva</button></a>
   </p>
+  <br>
+  <h2><u>Elokuvat</u></h2>
+  <ul>
+    {% for movie in movies %}
+    <li><a href="/movie/{{ movie.id }}">{{ movie.title }}</a></li>
+    {% endfor %}
+  </ul>
 </body>
 
 </html>
