@@ -32,8 +32,8 @@ def create_movie():
     user_id = session["user_id"]
 
     res = movies.see_if_movie_exists(title)
-    
-    if res is None:
+
+    if not res:
         movies.add_new_movie(title, director, release_date, description, user_id)
     else:
         return "Elokuva on jo lisätty!"
@@ -57,6 +57,19 @@ def update_movie():
         movies.update_movie(movie_id, title, director, release_date, description)
 
     return redirect("/movie/" + str(movie_id))
+
+@app.route("/remove_movie/<int:movie_id>", methods=["GET", "POST"])
+def remove_movie(movie_id):
+    if request.method == "GET":
+        movie = movies.get_movie(movie_id)
+        return render_template("remove_movie.html", movie=movie)
+
+    if request.method == "POST":
+        if "confirm_remove" in request.form:
+            movies.remove_movie(movie_id)
+            return redirect("/")
+
+        return redirect("/movie/" + str(movie_id))
 
 @app.route("/register")
 def register():

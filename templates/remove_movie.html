@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Poista elokuva</title>
+</head>
+
+<body>
+    <h1>Elokuvasovellus</h1>
+    <h3><u>Poista elokuva</u></h3>
+    <p>Oletko varma, että haluat poistaa elokuvan <b>{{ movie.title }} ({{ movie.release_date }})?</b></p>
+    <p>Jos päätät poistaa elokuvan, päätöstä ei voida peruuttaa.</p>
+  <form action="/remove_movie/{{ movie.id }}" method="post">
+    <input type="hidden" name="movie_id" value="{{ movie.id }}" />
+    <input type="submit" name="cancel_remove" value="Peruuta" />
+    <input type="submit" name="confirm_remove" value="Poista elokuva" />
+  </form>
+    <p>
+        <a href="/">Takaisin etusivulle</a>
+    </p>
+</body>
+
+</html>

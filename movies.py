@@ -22,10 +22,10 @@ def get_movie(movie_id):
     return db.query(sql, [movie_id])[0]
 
 def see_if_movie_exists(title):
-    sql = "SELECT 1 FROM movies WHERE movies.title = ?"
-    res = db.query(sql, [title])[0]
+    sql = "SELECT 1 FROM movies WHERE title = ?"
+    res = db.query(sql, [title])
 
-    if res is None:
+    if res:
         return True
 
     return False
@@ -37,3 +37,7 @@ def update_movie(movie_id, title, director, release_date, description):
                             description = ?
                             WHERE id = ?"""
     db.execute(sql, [title, director, release_date, description, movie_id])
+
+def remove_movie(movie_id):
+    sql = "DELETE FROM movies WHERE id = ?"
+    db.execute(sql, [movie_id])
