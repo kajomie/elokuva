@@ -12,19 +12,25 @@
     Tervetuloa Elokuvasovellukseen!<br>
     Olet kirjautunut sisään tunnuksella <b>{{ session.username }}</b>
   </p>
-    {% endif %}
-
   <p>
-    <a href="/login">Kirjaudu sisään</a><br>
-    <a href="/register">Luo tunnus</a><br>
     <a href="/logout">Kirjaudu ulos</a>
   </p>
 
   <p>
-    <a href="/search_movie"><button>Hae elokuvia</button></a><br><br>
     <a href="/add_movie"><button>Lisää elokuva</button></a>
   </p>
+  {% else %}
+  <p>
+    <a href="/login">Kirjaudu sisään</a><br>
+    <a href="/register">Luo tunnus</a><br>
+  </p>
+  {% endif %}
+
+  <p>
+    <a href="/search_movie"><button>Hae elokuvia</button></a><br><br>
+  </p>
   <br>
+
   <h2><u>Elokuvat</u></h2>
   <ul>
     {% for movie in movies %}
