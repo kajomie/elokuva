@@ -19,7 +19,8 @@ def get_movie(movie_id):
         FROM movies, users
         WHERE movies.user_id = users.id AND
             movies.id = ?"""
-    return db.query(sql, [movie_id])[0]
+    res = db.query(sql, [movie_id])
+    return res[0] if res else None
 
 def see_if_movie_exists(title):
     sql = "SELECT 1 FROM movies WHERE title = ?"
