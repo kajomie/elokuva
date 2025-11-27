@@ -27,7 +27,7 @@
         <b>Kuvaus: </b> {{ movie.description }}
     </p>
     <p>     
-        Elokuvan lisäsi käyttäjä {{ movie.username }}
+        Elokuvan lisäsi käyttäjä <a href="/user/{{ movie.user_id }}">{{ movie.username }}</a>
     </p>
     <br>
     <p>

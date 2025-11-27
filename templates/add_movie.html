@@ -11,19 +11,19 @@
   <form action="/create_movie" method="post">
     <p>
       <b>Nimi:</b> <br />
-      <input type="text" name="title" />
+      <input type="text" name="title" maxlength="60" required/>
     </p>
     <p>
       <b>Ohjaaja:</b> <br />
-      <input type="text" name="director" />
+      <input type="text" name="director" maxlength="60" required/>
     </p>
     <p>
       <b>Valmistumisvuosi:</b> <br />
-      <input type="text" name="release_date" size="6" />
+      <input type="text" name="release_date" size="6" pattern="^(19|20)\d{2}$" required/>
     </p>
     <p>
       <b>Kuvaus:</b> <br />
-      <textarea name="description" rows="14" cols="65"></textarea>
+      <textarea name="description" rows="14" cols="65" maxlength="1000" required></textarea>
     </p>
       <input type="submit" name="cancel_add" value="Peruuta" />
       <input type="submit" name="confirm_add" value="Lisää elokuva" />

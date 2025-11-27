@@ -5,6 +5,7 @@ from werkzeug.security import check_password_hash, generate_password_hash
 import config
 import db
 import movies
+import re
 
 app = Flask(__name__)
 app.secret_key = config.secret_key
@@ -37,9 +38,21 @@ def create_movie():
     require_login()
 
     title = request.form["title"]
+    if not title or len(title) > 60:
+        abort(403)
+
     director = request.form["director"]
+    if not director or len(director) > 60:
+        abort(403)
+
     release_date = request.form["release_date"]
+    if not re.search("^(19|20)\d{2}$", release_date):
+        abort(403)
+
     description = request.form["description"]
+    if not description or len(description) > 1000:
+        abort(403)
+
     user_id = session["user_id"]
 
     res = movies.see_if_movie_exists(title)
@@ -78,9 +91,20 @@ def update_movie():
         abort(403)
 
     title = request.form["title"]
+    if not title or len(title) > 60:
+        abort(403)
+
     director = request.form["director"]
+    if not director or len(director) > 60:
+        abort(403)
+
     release_date = request.form["release_date"]
+    if not re.search("^(19|20)\d{2}$", release_date):
+        abort(403)
+
     description = request.form["description"]
+    if not description or len(description) > 1000:
+        abort(403)
 
     if "save_edit" in request.form:
         movies.update_movie(movie_id, title, director, release_date, description)
