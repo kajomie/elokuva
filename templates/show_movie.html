@@ -7,13 +7,14 @@
 
 <body>
     <h1>Elokuvasovellus</h1>
-    <h2><u> {{ movie.title }} </u></h2>
+    <h2><u>{{ movie.title }}</u></h2>
 
     {% if session.user_id == movie.user_id %}
     <p>
-    <a href="/edit_movie/{{ movie.id }}">Muokkaa elokuvan tietoja</a>
+    <a href="/edit_movie/{{ movie.id }}"><button>Muokkaa elokuvan tietoja</button></a>
     <br>
-    <a href="/remove_movie/{{ movie.id }}">Poista elokuva</a>
+    <br>
+    <a href="/remove_movie/{{ movie.id }}"><button>Poista elokuva</button></a>
     </p>
     {% endif %}
 
