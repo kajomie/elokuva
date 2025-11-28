@@ -10,7 +10,7 @@
   {% if session.username %}
   <p>
     Tervetuloa Elokuvasovellukseen!<br>
-    Olet kirjautunut sisään tunnuksella <b>{{ session.username }}</b>
+    Olet kirjautunut sisään tunnuksella <b><a href="/user/{{ session.user_id }}">{{ session.username }}</a></b>
   </p>
   <p>
     <a href="/logout">Kirjaudu ulos</a>
