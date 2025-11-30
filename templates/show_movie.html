@@ -19,20 +19,28 @@
     {% endif %}
 
     <p>
-        <b>Ohjaaja: </b> {{ movie.director }}
+    <b>Ohjaaja: </b> {{ movie.director }}
     </p>
     <p>
-        <b>Valmistumisvuosi: </b> {{ movie.release_date }}
+    <b>Valmistumisvuosi: </b> {{ movie.release_date }}
     </p>
     <p>
-        <b>Kuvaus: </b> {{ movie.description }}
+    <b>Kuvaus: </b> {{ movie.description }}
     </p>
-    <p>     
-        Elokuvan lisäsi käyttäjä <a href="/user/{{ movie.user_id }}">{{ movie.username }}</a>
+    <p>
+    {% if genres %}
+    <b>Genre: </b>
+        {% for genre in genres %}
+        {{ genre.title }}{% if not loop.last %}, {% endif %}
+        {% endfor %}
+    </p>
+    {% endif %}
+    <p>
+    Elokuvan lisäsi käyttäjä <a href="/user/{{ movie.user_id }}">{{ movie.username }}</a>
     </p>
     <br>
     <p>
-        <a href="/">Takaisin etusivulle</a>
+    <a href="/">Takaisin etusivulle</a>
     </p>
 </body>
 

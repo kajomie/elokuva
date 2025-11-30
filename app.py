@@ -37,12 +37,15 @@ def show_movie(movie_id):
     if not movie:
         abort(404)
 
-    return render_template("show_movie.html", movie=movie)
+    genres = movies.get_genres(movie_id)
+
+    return render_template("show_movie.html", movie=movie, genres=genres)
 
 @app.route("/add_movie")
 def add_movie():
     require_login()
-    return render_template("add_movie.html")
+    genres = movies.get_all_genres()
+    return render_template("add_movie.html", genres=genres)
 
 @app.route("/create_movie", methods=["POST"])
 def create_movie():
@@ -66,11 +69,16 @@ def create_movie():
 
     user_id = session["user_id"]
 
+    genres = []
+    section = request.form.getlist("section")
+    if section:
+        genres = section
+
     res = movies.see_if_movie_exists(title)
 
     if "confirm_add" in request.form:
         if not res:
-            movies.add_new_movie(title, director, release_date, description, user_id)
+            movies.add_new_movie(title, director, release_date, description, user_id, genres)
         else:
             return "Elokuva on jo lisätty!"
 

@@ -12,3 +12,14 @@ CREATE TABLE movies (
     description TEXT,
     user_id INTEGER REFERENCES users
 );
+
+CREATE TABLE genres (
+    id INTEGER PRIMARY KEY,
+    title TEXT
+);
+
+CREATE TABLE movie_genres (
+    id INTEGER PRIMARY KEY,
+    movie_id INTEGER REFERENCES movies,
+    genre_id INTEGER REFERENCES genres
+);

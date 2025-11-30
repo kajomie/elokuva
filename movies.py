@@ -1,8 +1,31 @@
 import db
 
-def add_new_movie(title, director, release_date, description, user_id):
+def get_all_genres():
+    sql = "SELECT id, title FROM genres ORDER BY id"
+    res = db.query(sql)
+
+    genres = {}
+    for id, title in res:
+        genres[id] = title
+
+    return genres
+
+def add_new_movie(title, director, release_date, description, user_id, genres):
     sql = """INSERT INTO movies (title, director, release_date, description, user_id) VALUES (?, ?, ?, ?, ?)"""
     db.execute(sql, [title, director, release_date, description, user_id])
+
+    movie_id = db.last_insert_id()
+
+    sql = "INSERT INTO movie_genres (movie_id, genre_id) VALUES (?, ?)"
+    for genre in genres:
+        db.execute(sql, [movie_id, genre])
+
+def get_genres(movie_id):
+    sql = """SELECT genres.title
+            FROM genres, movie_genres
+            WHERE movie_genres.movie_id = ? AND
+            genres.id = movie_genres.genre_id"""
+    return db.query(sql, [movie_id])
 
 def get_movies():
     sql = "SELECT id, title, release_date FROM movies ORDER BY title"
@@ -48,4 +71,5 @@ def search_movies(query):
             FROM movies
             WHERE title LIKE ? OR director LIKE ?
             ORDER BY title"""
-    return db.query(sql, ["%" + query + "%", "%" + query + "%"])
+    searching_query = "%" + query + "%"
+    return db.query(sql, [searching_query, searching_query])
