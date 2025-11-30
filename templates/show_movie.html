@@ -53,6 +53,7 @@
         Kirjoita arvostelu:<br>
         <textarea name="review_text" rows="12" cols="50" maxlength="1000" required></textarea><br>
         <input type="hidden" name="movie_id" value="{{ movie.id }}">
+        <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}" />
         <input type="submit" name="cancel_review" value="Peruuta" />
         <input type="submit" name="confirm_review" value="Lisää arvostelu" />
     </form>

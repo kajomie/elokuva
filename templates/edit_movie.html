@@ -45,6 +45,7 @@
       <textarea name="description" rows="14" cols="65" maxlength="1000" required>{{ movie.description }}</textarea>
     </p>
     <input type="hidden" name="movie_id" value="{{ movie.id }}" />
+    <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}" />
     <input type="submit" name="cancel_edit" value="Peruuta" />
     <input type="submit" name="save_edit" value="Tallenna muutokset" />
   </form>
