@@ -69,9 +69,16 @@ def create_movie():
 
     user_id = session["user_id"]
 
+    all_genres = movies.get_all_genres()
+
     genres = []
     section = request.form.getlist("section")
+
     if section:
+        for genre in section:
+            if int(genre) not in list(all_genres.keys()):
+                abort(403)
+
         genres = section
 
     res = movies.see_if_movie_exists(title)
@@ -95,7 +102,16 @@ def edit_movie(movie_id):
     if movie["user_id"] != session["user_id"]:
         abort(403)
 
-    return render_template("edit_movie.html", movie=movie)
+    all_genres = movies.get_all_genres()
+    genres = {}
+
+    for genre in all_genres:
+        genres[genre] = ""
+
+    for genre in movies.get_genres(movie_id):
+        genres[genre] = genre
+
+    return render_template("edit_movie.html", movie=movie, genres=genres, all_genres=all_genres)
 
 @app.route("/update_movie", methods=["POST"])
 def update_movie():
@@ -125,8 +141,20 @@ def update_movie():
     if not description or len(description) > 1000:
         abort(403)
 
+    all_genres = movies.get_all_genres()
+
+    genres = []
+    section = request.form.getlist("section")
+
+    if section:
+        for genre in section:
+            if int(genre) not in list(all_genres.keys()):
+                abort(403)
+
+        genres = section
+
     if "save_edit" in request.form:
-        movies.update_movie(movie_id, title, director, release_date, description)
+        movies.update_movie(movie_id, title, director, release_date, description, genres)
 
     return redirect("/movie/" + str(movie_id))
 

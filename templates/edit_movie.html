@@ -22,6 +22,25 @@
       <input type="text" name="release_date" size="6" value="{{ movie.release_date }}" pattern="^(19|20)\d{2}$" required/>
     </p>
     <p>
+    <b>Genre:</b><br />
+    {% for genre in genres %}
+      {% if genres[genre] == genre %}
+        {{ genre.title }}{% if not loop.last %}, {% endif %}
+      {% endif %}
+    {% endfor %}
+    <br>
+    <select name="section" multiple>
+      <!-- <option value="">(Valitse genre)</option> -->
+      {% for genre in all_genres %}
+        {% if genres[genre] == genre %}
+        <option value="{{ genre }}" selected>{{ all_genres[genre] }}</option>
+        {% else %}
+        <option value="{{ genre }}">{{ all_genres[genre] }}</option>
+        {% endif %}
+      {% endfor %}
+    </select>
+    </p>
+    <p>
       <b>Kuvaus:</b><br />
       <textarea name="description" rows="14" cols="65" maxlength="1000" required>{{ movie.description }}</textarea>
     </p>

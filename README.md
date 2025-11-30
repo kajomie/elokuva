@@ -8,4 +8,10 @@
 - Käyttäjä pystyy kirjoittamaan elokuvalle arvostelun ja antamaan sille oman arvosanan, sekä lukea muiden käyttäjien kirjoittamia arvosteluja ja nähdä elokuvalle annetun keskivertoarvosanan.
 Pääasiallisena tietokohteena on itse elokuva, ja toissijaisena tietokohteena on käyttäjän kirjoittama arvostelu.
 
-Tiedosto database.db voidaan luoda komennolla sqlite3 database.db < schema.sql.
+Kun sovellus on kloonattu, niin se voidaan ottaa käyttöön seuraavasti:
+pip install flask
+python3 -m venv venv
+source venv/bin/activate
+sqlite3 database.db < schema.sql
+sqlite3 database.db < init.sql
+flask run

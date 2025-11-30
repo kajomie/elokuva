@@ -54,7 +54,7 @@ def see_if_movie_exists(title):
 
     return False
 
-def update_movie(movie_id, title, director, release_date, description):
+def update_movie(movie_id, title, director, release_date, description, genres):
     sql = """UPDATE movies SET title = ?,
                             director = ?,
                             release_date = ?,
@@ -62,7 +62,16 @@ def update_movie(movie_id, title, director, release_date, description):
                             WHERE id = ?"""
     db.execute(sql, [title, director, release_date, description, movie_id])
 
+    sql = "DELETE FROM movie_genres WHERE movie_id = ?"
+    db.execute(sql, [movie_id])
+
+    sql = "INSERT INTO movie_genres (movie_id, genre_id) VALUES (?, ?)"
+    for genre in genres:
+        db.execute(sql, [movie_id, genre])
+
 def remove_movie(movie_id):
+    sql = "DELETE FROM movie_genres WHERE movie_id = ?"
+    db.execute(sql, [movie_id])
     sql = "DELETE FROM movies WHERE id = ?"
     db.execute(sql, [movie_id])
 
