@@ -13,6 +13,14 @@ CREATE TABLE movies (
     user_id INTEGER REFERENCES users
 );
 
+CREATE TABLE reviews (
+    id INTEGER PRIMARY KEY,
+    movie_id INTEGER REFERENCES movies,
+    user_id INTEGER REFERENCES users,
+    rating INTEGER,
+    review_text TEXT
+);
+
 CREATE TABLE genres (
     id INTEGER PRIMARY KEY,
     title TEXT

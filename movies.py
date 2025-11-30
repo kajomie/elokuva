@@ -20,6 +20,17 @@ def add_new_movie(title, director, release_date, description, user_id, genres):
     for genre in genres:
         db.execute(sql, [movie_id, genre])
 
+def add_new_review(movie_id, user_id, rating, review_text):
+    sql = """INSERT INTO reviews (movie_id, user_id, rating, review_text) VALUES (?, ?, ?, ?)"""
+    db.execute(sql, [movie_id, user_id, rating, review_text])
+
+def get_reviews(movie_id):
+    sql = """SELECT reviews.rating, reviews.review_text, users.id user_id, users.username
+            FROM reviews, users
+            WHERE reviews.movie_id = ? AND reviews.user_id = users.id
+            ORDER BY reviews.id DESC"""
+    return db.query(sql, [movie_id])
+
 def get_genres(movie_id):
     sql = """SELECT genres.title
             FROM genres, movie_genres

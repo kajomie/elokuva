@@ -38,8 +38,9 @@ def show_movie(movie_id):
         abort(404)
 
     genres = movies.get_genres(movie_id)
+    reviews = movies.get_reviews(movie_id)
 
-    return render_template("show_movie.html", movie=movie, genres=genres)
+    return render_template("show_movie.html", movie=movie, genres=genres, reviews=reviews)
 
 @app.route("/add_movie")
 def add_movie():
@@ -90,6 +91,30 @@ def create_movie():
             return "Elokuva on jo lisätty!"
 
     return redirect("/")
+
+@app.route("/create_review", methods=["POST"])
+def create_review():
+    require_login()
+
+    rating = request.form["rating"]
+    if not re.search("^[1-5]$", rating):
+        abort(403)
+
+    review_text = request.form["review_text"]
+    if not review_text or len(review_text) > 1000:
+        abort(403)
+
+    movie_id = request.form["movie_id"]
+    movie = movies.get_movie(movie_id)
+    if not movie:
+        abort(403)
+
+    user_id = session["user_id"]
+
+    if "confirm_review" in request.form:
+        movies.add_new_review(movie_id, user_id, rating, review_text)
+
+    return redirect("/movie/" + str(movie_id))
 
 @app.route("/edit_movie/<int:movie_id>")
 def edit_movie(movie_id):
