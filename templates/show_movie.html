@@ -1,66 +1,57 @@
-<!DOCTYPE html>
-<html>
+{% extends "layout.html" %}
+{% block title %}Elokuvasovellus{% endblock %}
+{% block content %}
 
-<head>
-  <title>{{ movie.title }}</title>
-</head>
+<h2><u>{{ movie.title }}</u></h2>
 
-<body>
-    <h1>Elokuvasovellus</h1>
-    <h2><u>{{ movie.title }}</u></h2>
+{% if session.user_id == movie.user_id %}
+<p>
+<a href="/edit_movie/{{ movie.id }}"><button>Muokkaa elokuvan tietoja</button></a> |
+<a href="/remove_movie/{{ movie.id }}"><button>Poista elokuva</button></a>
+</p>
+{% endif %}
 
-    {% if session.user_id == movie.user_id %}
-    <p>
-    <a href="/edit_movie/{{ movie.id }}"><button>Muokkaa elokuvan tietoja</button></a>
-    <br>
-    <br>
-    <a href="/remove_movie/{{ movie.id }}"><button>Poista elokuva</button></a>
-    </p>
-    {% endif %}
-
-    <p>
-    <b>Ohjaaja: </b> {{ movie.director }}
-    </p>
-    <p>
-    <b>Valmistumisvuosi: </b> {{ movie.release_date }}
-    </p>
-    <p>
-    <b>Kuvaus: </b> {{ movie.description }}
-    </p>
-    <p>
-    {% if genres %}
-    <b>Genre: </b>
-        {% for genre in genres %}
-        {{ genre.title }}{% if not loop.last %}, {% endif %}
-        {% endfor %}
-    </p>
-    {% endif %}
-    <p>
-    Elokuvan lisännyt <a href="/user/{{ movie.user_id }}">{{ movie.username }}</a>
-    </p>
-    <br>
-    <h3><u>Arvostelut</u></h3>
-    <ul>
-        {% for review in reviews %}
-        <li>{{ review.review_text }}<br>
-        Arvosana: <b>{{ review.rating }}</b>. Elokuvan arvosteli <a href="/user/{{ review.user_id }}">{{ review.username }}</a></li>
-        {% endfor %}
-    </ul>
-    <h4>Lisää uusi arvostelu</h4>
-    <form action="/create_review" method="post">
-        Anna arvosana (1-5):<br>
-        <input type="text" name="rating" size="6" pattern="^[1-5]$" required/><br><br>
-        Kirjoita arvostelu:<br>
-        <textarea name="review_text" rows="12" cols="50" maxlength="1000" required></textarea><br>
-        <input type="hidden" name="movie_id" value="{{ movie.id }}">
-        <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}" />
-        <input type="submit" name="cancel_review" value="Peruuta" />
-        <input type="submit" name="confirm_review" value="Lisää arvostelu" />
-    </form>
-    <br>
-    <p>
-    <a href="/">Takaisin etusivulle</a>
-    </p>
-</body>
-
-</html>
+<p>
+<b>Ohjaaja: </b> {{ movie.director }}
+</p>
+<p>
+<b>Valmistumisvuosi: </b> {{ movie.release_date }}
+</p>
+<p>
+<b>Kuvaus: </b> {{ movie.description }}
+</p>
+<p>
+{% if genres %}
+<b>Genre: </b>
+    {% for genre in genres %}
+    {{ genre.title }}{% if not loop.last %}, {% endif %}
+    {% endfor %}
+</p>
+{% endif %}
+<p>
+Elokuvan lisännyt <a href="/user/{{ movie.user_id }}">{{ movie.username }}</a>
+</p>
+<br>
+<h3><u>Arvostelut</u></h3>
+<ul>
+    {% for review in reviews %}
+    <li>{{ review.review_text }}<br>
+    Arvosana: <b>{{ review.rating }}</b>. Elokuvan arvosteli <a href="/user/{{ review.user_id }}">{{ review.username }}</a></li>
+    {% endfor %}
+</ul>
+<h4>Lisää uusi arvostelu</h4>
+<form action="/create_review" method="post">
+    Anna arvosana (1-5):<br>
+    <input type="text" name="rating" size="6" pattern="^[1-5]$" required/><br><br>
+    Kirjoita arvostelu:<br>
+    <textarea name="review_text" rows="12" cols="50" maxlength="1000" required></textarea><br>
+    <input type="hidden" name="movie_id" value="{{ movie.id }}">
+    <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}" />
+    <input type="submit" name="cancel_review" value="Peruuta" />
+    <input type="submit" name="confirm_review" value="Lisää arvostelu" />
+</form>
+<br>
+<p>
+<a href="/">Takaisin etusivulle</a>
+</p>
+{% endblock %}

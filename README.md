@@ -9,9 +9,9 @@
 Pääasiallisena tietokohteena on itse elokuva, ja toissijaisena tietokohteena on käyttäjän kirjoittama arvostelu.
 
 Kun sovellus on kloonattu, niin se voidaan ottaa käyttöön seuraavasti:<br>
-pip install flask<br>
 python3 -m venv venv<br>
 source venv/bin/activate<br>
+pip install flask<br>
 sqlite3 database.db < schema.sql<br>
 sqlite3 database.db < init.sql<br>
 flask run

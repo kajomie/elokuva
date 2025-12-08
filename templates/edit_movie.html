@@ -1,58 +1,51 @@
-<!DOCTYPE html>
-<html>
+{% extends "layout.html" %}
+{% block title %}Elokuvasovellus{% endblock %}
+{% block content %}
 
-<head>
-  <title>Muokkaa elokuvan tietoja</title>
-</head>
-
-<body>
-    <h1>Elokuvasovellus</h1>
-    <h3><u>Muokkaa elokuvan tietoja</u></h3>
-  <form action="/update_movie" method="post">
-    <p>
-      <b>Nimi:</b><br />
-      <input type="text" name="title" value="{{ movie.title }}" maxlength="60" required />
-    </p>
-    <p>
-      <b>Ohjaaja:</b><br />
-      <input type="text" name="director" value="{{ movie.director }}" maxlength="60" required/>
-    </p>
-    <p>
-      <b>Valmistumisvuosi:</b><br />
-      <input type="text" name="release_date" size="6" value="{{ movie.release_date }}" pattern="^(19|20)\d{2}$" required/>
-    </p>
-    <p>
-    <b>Genre:</b><br />
-    {% for genre in genres %}
+<h2><u>Muokkaa elokuvan tietoja</u></h2>
+<form action="/update_movie" method="post">
+  <p>
+    <b>Nimi:</b><br />
+    <input type="text" name="title" value="{{ movie.title }}" maxlength="60" required />
+  </p>
+  <p>
+    <b>Ohjaaja:</b><br />
+    <input type="text" name="director" value="{{ movie.director }}" maxlength="60" required/>
+  </p>
+  <p>
+    <b>Valmistumisvuosi:</b><br />
+    <input type="text" name="release_date" size="6" value="{{ movie.release_date }}" pattern="^(19|20)\d{2}$" required/>
+  </p>
+  <p>
+  <b>Genre:</b><br />
+  {% for genre in genres %}
+    {% if genres[genre] == genre %}
+      {{ genre.title }}{% if not loop.last %}, {% endif %}
+    {% endif %}
+  {% endfor %}
+  <br>
+  <select name="section" multiple>
+    <!-- <option value="">(Valitse genre)</option> -->
+    {% for genre in all_genres %}
       {% if genres[genre] == genre %}
-        {{ genre.title }}{% if not loop.last %}, {% endif %}
+      <option value="{{ genre }}" selected>{{ all_genres[genre] }}</option>
+      {% else %}
+      <option value="{{ genre }}">{{ all_genres[genre] }}</option>
       {% endif %}
     {% endfor %}
-    <br>
-    <select name="section" multiple>
-      <!-- <option value="">(Valitse genre)</option> -->
-      {% for genre in all_genres %}
-        {% if genres[genre] == genre %}
-        <option value="{{ genre }}" selected>{{ all_genres[genre] }}</option>
-        {% else %}
-        <option value="{{ genre }}">{{ all_genres[genre] }}</option>
-        {% endif %}
-      {% endfor %}
-    </select>
-    </p>
-    <p>
-      <b>Kuvaus:</b><br />
-      <textarea name="description" rows="14" cols="65" maxlength="1000" required>{{ movie.description }}</textarea>
-    </p>
-    <input type="hidden" name="movie_id" value="{{ movie.id }}" />
-    <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}" />
-    <input type="submit" name="cancel_edit" value="Peruuta" />
-    <input type="submit" name="save_edit" value="Tallenna muutokset" />
-  </form>
-  <br>
-    <p>
-      <a href="/">Takaisin etusivulle</a>
-    </p>
-</body>
-
-</html>
+  </select>
+  </p>
+  <p>
+    <b>Kuvaus:</b><br />
+    <textarea name="description" rows="14" cols="65" maxlength="1000" required>{{ movie.description }}</textarea>
+  </p>
+  <input type="hidden" name="movie_id" value="{{ movie.id }}" />
+  <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}" />
+  <input type="submit" name="cancel_edit" value="Peruuta" />
+  <input type="submit" name="save_edit" value="Tallenna muutokset" />
+</form>
+<br>
+  <p>
+  <a href="/">Takaisin etusivulle</a>
+  </p>
+{% endblock %}

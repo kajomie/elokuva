@@ -1,25 +1,18 @@
-<!DOCTYPE html>
-<html>
+{% extends "layout.html" %}
+{% block title %}Elokuvasovellus{% endblock %}
+{% block content %}
 
-<head>
-  <title>Poista elokuva</title>
-</head>
-
-<body>
-    <h1>Elokuvasovellus</h1>
-    <h3><u>Poista elokuva</u></h3>
-    <p>Oletko varma, että haluat poistaa elokuvan <b>{{ movie.title }} ({{ movie.release_date }})?</b></p>
-    <p>Jos päätät poistaa elokuvan, päätöstä ei voi enää peruuttaa.</p>
-  <form action="/remove_movie/{{ movie.id }}" method="post">
-    <input type="hidden" name="movie_id" value="{{ movie.id }}" />
-    <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}" />
-    <input type="submit" name="cancel_remove" value="Peruuta" />
-    <input type="submit" name="confirm_remove" value="Poista elokuva" />
-  </form>
-  <br>
-    <p>
-    <a href="/">Takaisin etusivulle</a>
-    </p>
-</body>
-
-</html>
+<h2><u>Poista elokuva</u></h2>
+<p>Oletko varma, että haluat poistaa elokuvan <b>{{ movie.title }} ({{ movie.release_date }})?</b></p>
+<p>Jos päätät poistaa elokuvan, päätöstä ei voi enää peruuttaa.</p>
+<form action="/remove_movie/{{ movie.id }}" method="post">
+<input type="hidden" name="movie_id" value="{{ movie.id }}" />
+<input type="hidden" name="csrf_token" value="{{ session.csrf_token }}" />
+<input type="submit" name="cancel_remove" value="Peruuta" />
+<input type="submit" name="confirm_remove" value="Poista elokuva" />
+</form>
+<br>
+<p>
+<a href="/">Takaisin etusivulle</a>
+</p>
+{% endblock %}

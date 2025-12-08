@@ -1,31 +1,25 @@
-<!DOCTYPE html>
-<html>
+{% extends "layout.html" %}
+{% block title %}Elokuvasovellus{% endblock %}
+{% block content %}
 
-<head>
-  <title>Rekisteröinti</title>
-</head>
-
-<body>
-  <h1>Elokuvasovellus</h1>
-  <form action="/create" method="post">
-    <p>
-      <b>Tunnus:</b> <br />
-      <input type="text" name="username" />
-    </p>
-    <p>
-      <b>Salasana:</b> <br />
-      <input type="password" name="password1" />
-    </p>
-    <p>
-      <b>Salasana uudestaan:</b> <br />
-      <input type="password" name="password2" />
-    </p>
-    <input type="submit" value="Luo tunnus" />
-  </form>
-    <br>
-    <p>
-      <a href="/">Takaisin etusivulle</a>
-    </p>
-</body>
-
-</html>
+<h2><u>Rekisteröidy</u></h2>
+<form action="/create" method="post">
+  <p>
+    <b>Tunnus:</b> <br />
+    <input type="text" name="username" />
+  </p>
+  <p>
+    <b>Salasana:</b> <br />
+    <input type="password" name="password1" />
+  </p>
+  <p>
+    <b>Salasana uudestaan:</b> <br />
+    <input type="password" name="password2" />
+  </p>
+  <input type="submit" value="Luo tunnus" />
+</form>
+  <br>
+  <p>
+  <a href="/">Takaisin etusivulle</a>
+  </p>
+{% endblock %}

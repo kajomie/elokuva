@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>{% block title %}{% endblock %}</title>
+</head>
+
+<body>
+  <h1>Elokuvasovellus</h1>
+  {% if session.username %}
+  <p>
+    Tervetuloa Elokuvasovellukseen!<br>
+    Olet kirjautunut sisään tunnuksella <b><a href="/user/{{ session.user_id }}">{{ session.username }}</a></b>
+  </p>
+  {% endif %}
+  <p>
+  <a href="/search_movie"><button>Hae elokuvia</button></a> |
+  {% if session.user_id %}
+  <a href="/add_movie"><button>Lisää elokuva</button></a> |
+  <a href="/logout"><button>Kirjaudu ulos</button></a>
+  {% else %}
+  <a href="/login"><button>Kirjaudu sisään</button></a> |
+  <a href="/register"><button>Luo tunnus</button></a><br>
+  {% endif %}
+  </p>
+  <br>
+    {% block content %}{% endblock %}
+</body>
+</html>
