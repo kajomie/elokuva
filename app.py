@@ -1,7 +1,7 @@
 import secrets
 import sqlite3
 from flask import Flask
-from flask import abort, redirect, render_template, request, session
+from flask import abort, flash, redirect, render_template, request, session
 import config
 import db
 import movies
@@ -61,11 +61,11 @@ def create_movie():
     check_csrf()
 
     title = request.form["title"]
-    if not title or len(title) > 60:
+    if not title or len(title) > 60 or not re.search(".*\S.*", title):
         abort(403)
 
     director = request.form["director"]
-    if not director or len(director) > 60:
+    if not director or len(director) > 60 or not re.search(".*\S.*", director):
         abort(403)
 
     release_date = request.form["release_date"]
@@ -96,7 +96,8 @@ def create_movie():
         if not res:
             movies.add_new_movie(title, director, release_date, description, user_id, genres)
         else:
-            return "Elokuva on jo lisätty!"
+            flash("Elokuva on jo lisätty!")
+            return redirect("/add_movie")
 
     return redirect("/")
 
@@ -162,11 +163,11 @@ def update_movie():
         abort(403)
 
     title = request.form["title"]
-    if not title or len(title) > 60:
+    if not title or len(title) > 60 or not re.search(".*\S.*", title):
         abort(403)
 
     director = request.form["director"]
-    if not director or len(director) > 60:
+    if not director or len(director) > 60 or not re.search(".*\S.*", director):
         abort(403)
 
     release_date = request.form["release_date"]
@@ -236,15 +237,35 @@ def create():
     username = request.form["username"]
     password1 = request.form["password1"]
     password2 = request.form["password2"]
-    if password1 != password2:
-        return "VIRHE: salasanat eivät ole samat"
 
+    if not username or not password1 or not password2:
+        flash("VIRHE: käyttäjänimi tai salasana puuttuu")
+        return redirect("/register")
+    if len(password1) < 5 or len(password2) < 5:
+        flash("VIRHE: salasanan tulee olla minimissään 5 merkkiä")
+        return redirect("/register")
+    if len(username) > 40 or len(password1) > 250 or len(password2) > 250:
+        flash("VIRHE: käyttäjänimi tai salasana on liian pitkä")
+        return redirect("/register")
+
+    if not re.search(".*\S.*", username):
+        flash("VIRHE: käyttäjänimi ei saa olla tyhjä")
+        return redirect("/register")
+    if not re.search(".*\S.*", password1) or not re.search(".*\S.*", password2):
+        flash("VIRHE: salasana ei saa olla tyhjä")
+        return redirect("/register")
+
+    if password1 != password2:
+        flash("VIRHE: salasanat eivät ole samat")
+        return redirect("/register")
     try:
         users.create_user(username, password1)
     except sqlite3.IntegrityError:
-        return "VIRHE: tunnus on jo varattu"
+        flash("VIRHE: tunnus on jo varattu")
+        return redirect("/register")
 
-    return "Tunnus luotu"
+    flash("Tunnuksen luonti onnistui")
+    return redirect("/")
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
@@ -262,7 +283,8 @@ def login():
             session["csrf_token"] = secrets.token_hex(16)
             return redirect("/")
         else:
-            return "VIRHE: väärä tunnus tai salasana"
+            flash("VIRHE: väärä tunnus tai salasana")
+            return redirect("/login")
 
 @app.route("/logout")
 def logout():

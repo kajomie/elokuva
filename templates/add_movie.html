@@ -6,11 +6,11 @@
 <form action="/create_movie" method="post">
   <p>
     <b>Nimi:</b> <br />
-    <input type="text" name="title" maxlength="60" required/>
+    <input type="text" name="title" maxlength="60" pattern=".*\S.*" required/>
   </p>
   <p>
     <b>Ohjaaja:</b> <br />
-    <input type="text" name="director" maxlength="60" required/>
+    <input type="text" name="director" maxlength="60" pattern=".*\S.*" required/>
   </p>
   <p>
     <b>Valmistumisvuosi:</b> <br />
