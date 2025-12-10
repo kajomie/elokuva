@@ -10,15 +10,16 @@ CREATE TABLE movies (
     director TEXT,
     release_date INTEGER,
     description TEXT,
-    user_id INTEGER REFERENCES users
+    user_id INTEGER REFERENCES users ON DELETE CASCADE
 );
 
 CREATE TABLE reviews (
     id INTEGER PRIMARY KEY,
-    movie_id INTEGER REFERENCES movies,
-    user_id INTEGER REFERENCES users,
+    movie_id INTEGER REFERENCES movies ON DELETE CASCADE,
+    user_id INTEGER REFERENCES users ON DELETE CASCADE,
     rating INTEGER,
-    review_text TEXT
+    review_text TEXT,
+    UNIQUE(movie_id, user_id)
 );
 
 CREATE TABLE genres (
@@ -28,6 +29,6 @@ CREATE TABLE genres (
 
 CREATE TABLE movie_genres (
     id INTEGER PRIMARY KEY,
-    movie_id INTEGER REFERENCES movies,
-    genre_id INTEGER REFERENCES genres
+    movie_id INTEGER REFERENCES movies ON DELETE CASCADE,
+    genre_id INTEGER REFERENCES genres ON DELETE CASCADE
 );

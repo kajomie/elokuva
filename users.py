@@ -10,6 +10,12 @@ def get_movies(user_id):
     sql = "SELECT id, title, release_date FROM movies WHERE user_id = ? ORDER BY id DESC"
     return db.query(sql, [user_id])
 
+def get_user_reviews(user_id):
+    sql = """SELECT reviews.rating, reviews.review_text, movies.title, movies.release_date
+            FROM reviews, movies
+            WHERE reviews.user_id = ? AND movies.id = reviews.movie_id"""
+    return db.query(sql, [user_id])
+
 def create_user(username, password):
     password_hash = generate_password_hash(password)
     sql = "INSERT INTO users (username, password_hash) VALUES (?, ?)"

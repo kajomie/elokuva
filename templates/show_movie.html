@@ -39,8 +39,9 @@ Elokuvan lisännyt <a href="/user/{{ movie.user_id }}">{{ movie.username }}</a>
     Arvosana: <b>{{ review.rating }}</b>. Elokuvan arvosteli <a href="/user/{{ review.user_id }}">{{ review.username }}</a></li>
     {% endfor %}
 </ul>
-<h4>Lisää uusi arvostelu</h4>
-<form action="/create_review" method="post">
+{% if not review_check %}
+    <h4>Lisää uusi arvostelu</h4>
+    <form action="/create_review" method="post">
     Anna arvosana (1-5):<br>
     <input type="text" name="rating" size="6" pattern="^[1-5]$" required/><br><br>
     Kirjoita arvostelu:<br>
@@ -49,7 +50,8 @@ Elokuvan lisännyt <a href="/user/{{ movie.user_id }}">{{ movie.username }}</a>
     <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}" />
     <input type="submit" name="cancel_review" value="Peruuta" />
     <input type="submit" name="confirm_review" value="Lisää arvostelu" />
-</form>
+    </form>
+{% endif %}
 <br>
 <p>
 <a href="/">Takaisin etusivulle</a>

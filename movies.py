@@ -24,6 +24,10 @@ def add_new_review(movie_id, user_id, rating, review_text):
     sql = """INSERT INTO reviews (movie_id, user_id, rating, review_text) VALUES (?, ?, ?, ?)"""
     db.execute(sql, [movie_id, user_id, rating, review_text])
 
+def see_if_review_exists(movie_id, user_id):
+    sql = "SELECT 1 FROM reviews WHERE movie_id = ? AND user_id = ?"
+    return db.query(sql, [movie_id, user_id])
+
 def get_reviews(movie_id):
     sql = """SELECT reviews.rating, reviews.review_text, users.id user_id, users.username
             FROM reviews, users

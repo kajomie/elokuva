@@ -4,16 +4,35 @@
 
 <h2><u>Käyttäjä {{ user.username }}</u></h2>
 <p>
-Käyttäjä on lisännyt {{ movies | count }} elokuvaa.
+Käyttäjä on lisännyt {{ movies | count }} elokuvaa ja kirjoittanut {{ user_reviews | count }} arvostelua.
 </p>
 <p>
 <h3>Elokuvat</h3>
+{% if movies %}
 <ul>
     {% for movie in movies %}
     <li><a href="/movie/{{ movie.id }}">{{ movie.title }} ({{ movie.release_date }})</a></li>
     {% endfor %}
 </ul>
+{% else %}
+  Käyttäjä {{ user.username }} ei ole vielä lisännyt yhtään elokuvaa.
+{% endif %}
 </p>
+<p>
+<h3>Arvostelut</h3>
+{% if user_reviews %}
+<ul>
+    {% for review in user_reviews %}
+    <li>{{ review.title }} ({{ review.release_date }})
+      <br>Arvosana: {{ review.rating }}/5
+      <br>{{ review.review_text }}</li>
+    {% endfor %}
+</ul>
+</p>
+{% else %}
+  Käyttäjä {{ user.username }} ei ole vielä kirjoittanut yhtään arvostelua.
+  <br>
+{% endif %}
 <br>
 <p>
 <a href="/">Takaisin etusivulle</a>

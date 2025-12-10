@@ -34,8 +34,9 @@ def show_user(user_id):
         abort(404)
 
     movies = users.get_movies(user_id)
+    user_reviews = users.get_user_reviews(user_id)
 
-    return render_template("show_user.html", user=user, movies=movies)
+    return render_template("show_user.html", user=user, movies=movies, user_reviews=user_reviews)
 
 @app.route("/movie/<int:movie_id>")
 def show_movie(movie_id):
@@ -47,7 +48,10 @@ def show_movie(movie_id):
     genres = movies.get_genres(movie_id)
     reviews = movies.get_reviews(movie_id)
 
-    return render_template("show_movie.html", movie=movie, genres=genres, reviews=reviews)
+    user_id = session["user_id"]
+    review_check = movies.see_if_review_exists(movie_id, user_id)
+
+    return render_template("show_movie.html", movie=movie, genres=genres, reviews=reviews, review_check=review_check)
 
 @app.route("/add_movie")
 def add_movie():
