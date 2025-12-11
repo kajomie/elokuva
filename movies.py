@@ -29,11 +29,29 @@ def see_if_review_exists(movie_id, user_id):
     return db.query(sql, [movie_id, user_id])
 
 def get_reviews(movie_id):
-    sql = """SELECT reviews.rating, reviews.review_text, users.id user_id, users.username
+    sql = """SELECT reviews.id,
+            reviews.movie_id,
+            reviews.user_id,
+            reviews.rating,
+            reviews.review_text,
+            users.id user_id,
+            users.username
             FROM reviews, users
             WHERE reviews.movie_id = ? AND reviews.user_id = users.id
             ORDER BY reviews.id DESC"""
     return db.query(sql, [movie_id])
+
+def get_review(review_id):
+    sql = """SELECT reviews.id,
+            reviews.movie_id,
+            reviews.user_id,
+            reviews.rating,
+            reviews.review_text,
+            users.username
+        FROM reviews, users
+        WHERE reviews.id = ?"""
+    res = db.query(sql, [review_id])
+    return res[0] if res else None
 
 def get_genres(movie_id):
     sql = """SELECT genres.title
@@ -84,11 +102,21 @@ def update_movie(movie_id, title, director, release_date, description, genres):
     for genre in genres:
         db.execute(sql, [movie_id, genre])
 
+def update_review(review_id, movie_id, user_id, rating, review_text):
+    sql = """UPDATE reviews SET rating = ?,
+                            review_text = ?
+                            WHERE id = ?"""
+    db.execute(sql, [rating, review_text, review_id])
+
 def remove_movie(movie_id):
     sql = "DELETE FROM movie_genres WHERE movie_id = ?"
     db.execute(sql, [movie_id])
     sql = "DELETE FROM movies WHERE id = ?"
     db.execute(sql, [movie_id])
+
+def remove_review(review_id):
+    sql = "DELETE FROM reviews WHERE id = ?"
+    db.execute(sql, [review_id])
 
 def search_movies(query):
     sql = """SELECT id, title, director, release_date

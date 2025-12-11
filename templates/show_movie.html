@@ -37,6 +37,12 @@ Elokuvan lisännyt <a href="/user/{{ movie.user_id }}">{{ movie.username }}</a>
     {% for review in reviews %}
     <li>{{ review.review_text }}<br>
     Arvosana: <b>{{ review.rating }}</b>. Elokuvan arvosteli <a href="/user/{{ review.user_id }}">{{ review.username }}</a></li>
+    {% if session.user_id == review.user_id %}
+    <a href="/edit_review/{{ review.id }}"><button>Muokkaa arvostelua</button></a> |
+    <a href="/remove_review/{{ review.id }}"><button>Poista arvostelu</button></a>
+    <br>
+    {% endif %}
+    <br>
     {% endfor %}
 </ul>
 {% if not review_check %}

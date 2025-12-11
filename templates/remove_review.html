@@ -1,0 +1,19 @@
+{% extends "layout.html" %}
+{% block title %}Elokuvasovellus{% endblock %}
+{% block content %}
+
+<h2><u>Poista arvostelusi</u></h2>
+<p>Oletko varma, että haluat poistaa arvostelusi elokuvalle <b>{{ movie.title }} ({{ movie.release_date }})?</b></p>
+<p>Jos päätät poistaa arvostelun, päätöstä ei voi enää peruuttaa.</p>
+<form action="/remove_review/{{ review.id }}" method="post">
+<input type="hidden" name="movie_id" value="{{ movie.id }}" />
+<input type="hidden" name="review_id" value="{{ review.id }}" />
+<input type="hidden" name="csrf_token" value="{{ session.csrf_token }}" />
+<input type="submit" name="cancel_remove_review" value="Peruuta" />
+<input type="submit" name="confirm_remove_review" value="Poista arvostelu" />
+</form>
+<br>
+<p>
+<a href="/">Takaisin etusivulle</a>
+</p>
+{% endblock %}

@@ -133,6 +133,7 @@ def create_review():
 @app.route("/edit_movie/<int:movie_id>")
 def edit_movie(movie_id):
     require_login()
+
     movie = movies.get_movie(movie_id)
 
     if not movie:
@@ -151,6 +152,23 @@ def edit_movie(movie_id):
         genres[genre] = genre
 
     return render_template("edit_movie.html", movie=movie, genres=genres, all_genres=all_genres)
+
+@app.route("/edit_review/<int:review_id>")
+def edit_review(review_id):
+    require_login()
+
+    review = movies.get_review(review_id)
+
+    if not review:
+        abort(404)
+
+    if review["user_id"] != session["user_id"]:
+        abort(403)
+
+    movie_id = review["movie_id"]
+    movie = movies.get_movie(movie_id)
+
+    return render_template("edit_review.html", movie=movie, review=review)
 
 @app.route("/update_movie", methods=["POST"])
 def update_movie():
@@ -199,6 +217,35 @@ def update_movie():
 
     return redirect("/movie/" + str(movie_id))
 
+@app.route("/update_review", methods=["POST"])
+def update_review():
+    require_login()
+    check_csrf()
+
+    movie_id = request.form["movie_id"]
+    review_id = request.form["review_id"]
+    user_id = session["user_id"]
+    review = movies.get_review(review_id)
+
+    if not review:
+        abort(404)
+
+    if review["user_id"] != session["user_id"]:
+        abort(403)
+
+    rating = request.form["rating"]
+    if not rating or not re.search("^[1-5]$", rating):
+        abort(403)
+
+    review_text = request.form["review_text"]
+    if not review_text or len(review_text) > 1000:
+        abort(403)
+
+    if "save_edit_review" in request.form:
+        movies.update_review(review_id, movie_id, user_id, rating, review_text)
+
+    return redirect("/movie/" + str(movie_id))
+
 @app.route("/remove_movie/<int:movie_id>", methods=["GET", "POST"])
 def remove_movie(movie_id):
     require_login()
@@ -218,6 +265,33 @@ def remove_movie(movie_id):
         check_csrf()
         if "confirm_remove" in request.form:
             movies.remove_movie(movie_id)
+            return redirect("/")
+
+        return redirect("/movie/" + str(movie_id))
+
+@app.route("/remove_review/<int:review_id>", methods=["GET", "POST"])
+def remove_review(review_id):
+    require_login()
+
+    review = movies.get_review(review_id)
+
+    if not review:
+        abort(404)
+
+    review_id = review["id"]
+    movie_id = review["movie_id"]
+    movie = movies.get_movie(movie_id)
+
+    if review["user_id"] != session["user_id"]:
+        abort(403)
+
+    if request.method == "GET":
+        return render_template("remove_review.html", movie=movie, review=review)
+
+    if request.method == "POST":
+        check_csrf()
+        if "confirm_remove_review" in request.form:
+            movies.remove_review(review_id)
             return redirect("/")
 
         return redirect("/movie/" + str(movie_id))

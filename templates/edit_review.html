@@ -1,0 +1,22 @@
+{% extends "layout.html" %}
+{% block title %}Elokuvasovellus{% endblock %}
+{% block content %}
+
+<h2><u>Muokkaa arvostelua</u></h2>
+<p>Muokkaa arvosteluasi elokuvalle <b>{{ movie.title }} ({{ movie.release_date }})?</b></p>
+    <form action="/update_review" method="post">
+    Anna arvosana (1-5):<br>
+    <input type="text" name="rating" size="6" pattern="^[1-5]$" value="{{ review.rating }}" required/><br><br>
+    Kirjoita arvostelu:<br>
+    <textarea name="review_text" rows="12" cols="50" maxlength="1000" required>{{ review.review_text }}</textarea><br>
+    <input type="hidden" name="movie_id" value="{{ movie.id }}">
+    <input type="hidden" name="review_id" value="{{ review.id }}">
+    <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}" />
+    <input type="submit" name="cancel_edit_review" value="Peruuta" />
+    <input type="submit" name="save_edit_review" value="Tallenna muutokset" />
+    </form>
+<br>
+<p>
+<a href="/">Takaisin etusivulle</a>
+</p>
+{% endblock %}

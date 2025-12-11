@@ -23,7 +23,7 @@ Käyttäjä on lisännyt {{ movies | count }} elokuvaa ja kirjoittanut {{ user_r
 {% if user_reviews %}
 <ul>
     {% for review in user_reviews %}
-    <li>{{ review.title }} ({{ review.release_date }})
+    <li><b>{{ review.title }} ({{ review.release_date }})</b>
       <br>Arvosana: {{ review.rating }}/5
       <br>{{ review.review_text }}</li>
     {% endfor %}
