@@ -2,7 +2,7 @@
 {% block title %}Elokuvasovellus{% endblock %}
 {% block content %}
 
-<h2><u>Hae elokuvia</u></h2>
+<h2>Hae elokuvia</h2>
 <form action="/search_movie" method="get">
     <p>
     Haku:
@@ -14,7 +14,7 @@
 
 {% if query %}
 <br>
-<h2><u>Haun tulokset</u></h2>
+<h2>Haun tulokset</h2>
 <p>Haulla '<i>{{ query }}</i>' löytyi yhteensä {{ res | length }} tulosta.</p>
 <ul>
     {% for movie in res %}

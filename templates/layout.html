@@ -3,32 +3,31 @@
 
 <head>
   <title>{% block title %}{% endblock %}</title>
+  <link rel="stylesheet" href="/static/style.css">
 </head>
 
 <body>
-  <h1>Elokuvasovellus</h1>
-  {% if session.username %}
-  <p>
-    Tervetuloa Elokuvasovellukseen!<br>
-    Olet kirjautunut sisään tunnuksella <b><a href="/user/{{ session.user_id }}">{{ session.username }}</a></b>
-  </p>
-  {% endif %}
-  <p>
-  <a href="/search_movie"><button>Hae elokuvia</button></a> |
+  <div class="header">
+  <h1><a href="/">Elokuvasovellus</a></h1>
+  <div class="header-links">
+  <a href="/search_movie"><button>Hae elokuvia</button></a>
   {% if session.user_id %}
-  <a href="/add_movie"><button>Lisää elokuva</button></a> |
+  <a href="/add_movie"><button>Lisää elokuva</button></a>
   <a href="/logout"><button>Kirjaudu ulos</button></a>
   {% else %}
-  <a href="/login"><button>Kirjaudu sisään</button></a> |
+  <a href="/login"><button>Kirjaudu sisään</button></a>
   <a href="/register"><button>Luo tunnus</button></a><br>
   {% endif %}
-  </p>
-  <br>
-    {% for message in get_flashed_messages() %}
+  </div>
+  </div>
+  {% for message in get_flashed_messages() %}
     <div class="info">
     <b>{{ message }}</b>
     </div>
-    {% endfor %}
-    {% block content %}{% endblock %}
+  {% endfor %}
+  {% block content %}{% endblock %}
+<div class="footer">
+Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+</div>
 </body>
 </html>

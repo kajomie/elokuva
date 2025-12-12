@@ -2,7 +2,7 @@
 {% block title %}Elokuvasovellus{% endblock %}
 {% block content %}
 
-<h2><u>Poista arvostelusi</u></h2>
+<h2>Poista arvostelusi</h2>
 <p>Oletko varma, että haluat poistaa arvostelusi elokuvalle <b>{{ movie.title }} ({{ movie.release_date }})?</b></p>
 <p>Jos päätät poistaa arvostelun, päätöstä ei voi enää peruuttaa.</p>
 <form action="/remove_review/{{ review.id }}" method="post">

@@ -1,0 +1,159 @@
+* { 
+    box-sizing: border-box; 
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 100vh;
+    margin: 0;
+    font-family: Helvetica, sans-serif;
+    background-color: #b6bec9;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    background-color: #495e79;
+    padding-left: 2em;
+}
+
+.header a {
+    color: #fff;
+    text-decoration: none;
+}
+
+a {
+    color: #c20000;
+    text-decoration: none;
+}
+
+a:hover, button:hover {
+    cursor: pointer;
+}
+
+.header-links {
+    display: flex;
+    list-style-type: none;
+    gap: 2em;
+    padding: 2em;
+}
+
+.first-container {
+    display: flex;
+    flex-grow: 1;
+}
+
+.first-container-image {
+    background-image: url("/static/theater.jpg");
+    background-size: auto;
+    flex: 1;
+}
+
+.first-container-content {
+    flex: 1;
+    padding: 2em;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.second-container {
+    display: flex;
+    padding: 1em;
+    flex-grow: 1;
+    background-color: #a4aebc;
+}
+
+.movie-container {
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+    background-color: #c8ced6;
+    border-radius: 15px;
+    padding: 2em;
+    margin: 1.5em;
+    gap: 1em;
+}
+
+.movie {
+    padding: 2em;
+    border-style: solid;
+    border-color: #9f2638;
+    border-radius: 15px;
+}
+
+.header-links button {
+    border-radius: 15px;
+    border: none;
+    padding: 0.5em 2em;
+    font-size: 1em;
+    font-weight: bold;
+    color: #f5f3ff;
+    background-color: #b42b3f;
+}
+
+button, input[type=submit] {
+    border-radius: 15px;
+    border: none;
+    padding: 0.5em;
+    background-color: #b42b3f;
+    color: #f5f3ff;
+}
+
+.footer {
+    display: flex;
+    background-color: #455d7a;
+    padding: 2em;
+    color: #fff;
+    width: 100vw;
+}
+
+.info {
+    color: red;
+}
+
+.show-movie-first-container {
+    display: flex;
+    flex-direction: column;
+    padding: 2em;
+    padding-left: 10em;
+}
+
+.show-movie-second-container {
+    display: flex;
+    padding-left: 2em;
+    background-color: #a4aebc;
+}
+
+.review-container {
+    display: flex;
+    flex-direction: column;
+    padding-left: 2em;
+    padding-right: 2em;
+    padding-top: 2em;
+    gap: 1em;
+}
+
+.review {
+    padding: 1.5em;
+    border-style: solid;
+    border-color: #9f2638;
+    border-radius: 15px;
+    background-color: #c8ced6;
+}
+
+.review-buttons {
+    padding-top: 1em;
+    margin-right: 1em;
+}
+
+.add-review-container {
+    padding-left: 10em;
+    padding-bottom: 2em;
+    background-color: #a4aebc;
+}
+
+.back-to-index {
+    padding-left: 10em;
+    background-color: #a4aebc;
+}

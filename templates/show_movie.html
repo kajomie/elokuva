@@ -2,11 +2,11 @@
 {% block title %}Elokuvasovellus{% endblock %}
 {% block content %}
 
-<h2><u>{{ movie.title }}</u></h2>
-
+<div class="show-movie-first-container">
+<h2>{{ movie.title }}</h2>
 {% if session.user_id == movie.user_id %}
 <p>
-<a href="/edit_movie/{{ movie.id }}"><button>Muokkaa elokuvan tietoja</button></a> |
+<a href="/edit_movie/{{ movie.id }}"><button>Muokkaa elokuvan tietoja</button></a>
 <a href="/remove_movie/{{ movie.id }}"><button>Poista elokuva</button></a>
 </p>
 {% endif %}
@@ -31,20 +31,26 @@
 <p>
 Elokuvan lisännyt <a href="/user/{{ movie.user_id }}">{{ movie.username }}</a>
 </p>
+</div>
 <br>
-<h3><u>Arvostelut</u></h3>
-<ul>
+<div class="show-movie-second-container">
+<h3>Arvostelut</h3>
+<div class="review-container">
     {% for review in reviews %}
-    <li>{{ review.review_text }}<br>
-    Arvosana: <b>{{ review.rating }}</b>. Elokuvan arvosteli <a href="/user/{{ review.user_id }}">{{ review.username }}</a></li>
+    <div class="review">
+    {{ review.review_text }}<br>
+    Arvosana: <b>{{ review.rating }}</b>. Elokuvan arvosteli <a href="/user/{{ review.user_id }}">{{ review.username }}</a>
     {% if session.user_id == review.user_id %}
-    <a href="/edit_review/{{ review.id }}"><button>Muokkaa arvostelua</button></a> |
+    <div class="review-buttons">
+    <a href="/edit_review/{{ review.id }}"><button>Muokkaa arvostelua</button></a>
     <a href="/remove_review/{{ review.id }}"><button>Poista arvostelu</button></a>
-    <br>
+    </div>
     {% endif %}
-    <br>
+    </div>
     {% endfor %}
-</ul>
+</div>
+</div>
+<div class="add-review-container">
 {% if not review_check %}
     <h4>Lisää uusi arvostelu</h4>
     <form action="/create_review" method="post">
@@ -54,12 +60,16 @@ Elokuvan lisännyt <a href="/user/{{ movie.user_id }}">{{ movie.username }}</a>
     <textarea name="review_text" rows="12" cols="50" maxlength="1000" required></textarea><br>
     <input type="hidden" name="movie_id" value="{{ movie.id }}">
     <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}" />
+    <div class="review-buttons">
     <input type="submit" name="cancel_review" value="Peruuta" />
     <input type="submit" name="confirm_review" value="Lisää arvostelu" />
+    </div>
     </form>
 {% endif %}
-<br>
+</div>
+<div class="back-to-index">
 <p>
 <a href="/">Takaisin etusivulle</a>
 </p>
+</div>
 {% endblock %}

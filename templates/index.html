@@ -1,11 +1,39 @@
 {% extends "layout.html" %}
 {% block title %}Elokuvasovellus{% endblock %}
 {% block content %}
+<div class="first-container">
+<div class="first-container-image"></div>
+<div class="first-container-content">
+  <p>
+  <h2>Tervetuloa Elokuvasovellukseen!</h2><br>
+  {% if session.username %}
+  <p>
+  Olet kirjautunut sisään tunnuksella <b><a href="/user/{{ session.user_id }}">{{ session.username }}</a></b><br>
+  </p>
+  {% endif %}
 
-  <h2><u>Elokuvat</u></h2>
-  <ul>
-    {% for movie in movies %}
-    <li><a href="/movie/{{ movie.id }}">{{ movie.title }} ({{ movie.release_date }})</a></li>
-    {% endfor %}
-  </ul>
+  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas egestas, augue eu faucibus sagittis, arcu tellus accumsan metus, et
+  finibus risus quam quis dolor. Curabitur purus diam, consectetur non felis ac, ultrices semper odio. <br><br>
+  Etiam vitae arcu tortor. Sed aliquet faucibus maximus. Suspendisse potenti. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere
+  cubilia curae; Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.Curabitur mi mauris, ultrices non scelerisque euismod,
+  porta vitae purus. Donec blandit consequat tellus, sed aliquet eros blandit vitae. <br><br>
+
+  Fusce nec elementum nibh, ut dictum est. Nulla facilisi. Morbi vulputate commodo nisl, lacinia lacinia mauris facilisis vel. Morbi malesuada nulla sed
+  tellus sodales mattis. Suspendisse auctor dapibus nunc, a tempus libero congue eget. Sed est lorem, tempus ac accumsan a,
+  laoreet vel dolor. Integer in eros eget odio cursus rutrum. Nullam ac aliquet dui. Nulla eu ipsum vulputate, laoreet dui in, sagittis mauris.
+  </p>
+  <br>
+</div>
+</div>
+
+<div class="second-container">
+<h2>Elokuvat</h2>
+<div class="movie-container">
+  {% for movie in movies %}
+<div class="movie">
+  <a href="/movie/{{ movie.id }}">{{ movie.title }} ({{ movie.release_date }})</a>
+</div>
+  {% endfor %}
+</div>
+</div>
 {% endblock %}
