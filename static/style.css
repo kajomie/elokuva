@@ -148,7 +148,7 @@ button, input[type=submit] {
 }
 
 h2, h3, h4 {
-    color: #7d1e2c;
+    color: #701b27;
 }
 
 .review-container, .user-review-container {
@@ -192,6 +192,16 @@ h2, h3, h4 {
     padding-left: 10em;
     padding-bottom: 2em;
     background-color: #c0c0c0;
+}
+
+.average-rating {
+    color: #b42b3f;
+    font-weight: bold;
+    font-size: larger;
+}
+
+.page-container b, .add-review-container b, .review b {
+    color: #a22638;
 }
 
 .page-container, .search-first-container, .search-second-container, .user-first-container, .user-second-container {

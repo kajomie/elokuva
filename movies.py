@@ -78,6 +78,11 @@ def get_movie(movie_id):
     res = db.query(sql, [movie_id])
     return res[0] if res else None
 
+def get_average_rating(movie_id):
+    sql = "SELECT AVG(rating) FROM reviews WHERE reviews.movie_id = ?"
+    res = db.query(sql, [movie_id])
+    return res[0] if res else None
+
 def see_if_movie_exists(title):
     sql = "SELECT 1 FROM movies WHERE title = ?"
     res = db.query(sql, [title])

@@ -48,13 +48,20 @@ def show_movie(movie_id):
     genres = movies.get_genres(movie_id)
     reviews = movies.get_reviews(movie_id)
 
+    if reviews:
+        average_rating = movies.get_average_rating(movie_id)[0]
+        if not average_rating:
+            average_rating = None
+    else:
+        average_rating = None
+
     if session.get("user_id") is not None:
         user_id = session["user_id"]
         review_check = movies.see_if_review_exists(movie_id, user_id)
     else:
         review_check = True
 
-    return render_template("show_movie.html", movie=movie, genres=genres, reviews=reviews, review_check=review_check)
+    return render_template("show_movie.html", movie=movie, genres=genres, reviews=reviews, review_check=review_check, average_rating=average_rating)
 
 @app.route("/add_movie")
 def add_movie():
