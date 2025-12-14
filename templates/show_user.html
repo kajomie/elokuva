@@ -2,6 +2,7 @@
 {% block title %}Elokuvasovellus{% endblock %}
 {% block content %}
 
+<div class="user-first-container">
 <h2>Käyttäjä {{ user.username }}</h2>
 <p>
 Käyttäjä on lisännyt {{ movies | count }} elokuvaa ja kirjoittanut {{ user_reviews | count }} arvostelua.
@@ -9,32 +10,36 @@ Käyttäjä on lisännyt {{ movies | count }} elokuvaa ja kirjoittanut {{ user_r
 <p>
 <h3>Elokuvat</h3>
 {% if movies %}
-<ul>
+<div class="user-movies">
     {% for movie in movies %}
-    <li><a href="/movie/{{ movie.id }}">{{ movie.title }} ({{ movie.release_date }})</a></li>
+    <a href="/movie/{{ movie.id }}">{{ movie.title }} ({{ movie.release_date }})</a><br>
     {% endfor %}
-</ul>
+</div>
 {% else %}
-  Käyttäjä {{ user.username }} ei ole vielä lisännyt yhtään elokuvaa.
+  Käyttäjä ei ole vielä lisännyt yhtään elokuvaa.
 {% endif %}
 </p>
+</div>
+<div class="user-second-container">
 <p>
 <h3>Arvostelut</h3>
 {% if user_reviews %}
-<ul>
+<div class="user-review-container">
     {% for review in user_reviews %}
-    <li><b>{{ review.title }} ({{ review.release_date }})</b>
+    <div class="user-review">
+    <b>{{ review.title }} ({{ review.release_date }})</b>
       <br>Arvosana: {{ review.rating }}/5
-      <br>{{ review.review_text }}</li>
+      <br>{{ review.review_text }}
+    </div>
     {% endfor %}
-</ul>
+</div>
 </p>
 {% else %}
   Käyttäjä {{ user.username }} ei ole vielä kirjoittanut yhtään arvostelua.
   <br>
 {% endif %}
-<br>
-<p>
+</div>
+<div class="back-to-index">
 <a href="/">Takaisin etusivulle</a>
-</p>
+</div>
 {% endblock %}

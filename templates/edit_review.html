@@ -2,6 +2,7 @@
 {% block title %}Elokuvasovellus{% endblock %}
 {% block content %}
 
+<div class="page-container">
 <h2>Muokkaa arvostelua</h2>
 <p>Muokkaa arvosteluasi elokuvalle <b>{{ movie.title }} ({{ movie.release_date }})?</b></p>
     <form action="/update_review" method="post">
@@ -19,4 +20,5 @@
 <p>
 <a href="/">Takaisin etusivulle</a>
 </p>
+</div>
 {% endblock %}

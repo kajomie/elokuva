@@ -48,8 +48,11 @@ def show_movie(movie_id):
     genres = movies.get_genres(movie_id)
     reviews = movies.get_reviews(movie_id)
 
-    user_id = session["user_id"]
-    review_check = movies.see_if_review_exists(movie_id, user_id)
+    if session.get("user_id") is not None:
+        user_id = session["user_id"]
+        review_check = movies.see_if_review_exists(movie_id, user_id)
+    else:
+        review_check = True
 
     return render_template("show_movie.html", movie=movie, genres=genres, reviews=reviews, review_check=review_check)
 
@@ -292,7 +295,7 @@ def remove_review(review_id):
         check_csrf()
         if "confirm_remove_review" in request.form:
             movies.remove_review(review_id)
-            return redirect("/")
+            return redirect("/movie/" + str(movie_id))
 
         return redirect("/movie/" + str(movie_id))
 

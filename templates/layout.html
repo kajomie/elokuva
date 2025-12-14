@@ -10,13 +10,14 @@
   <div class="header">
   <h1><a href="/">Elokuvasovellus</a></h1>
   <div class="header-links">
-  <a href="/search_movie"><button>Hae elokuvia</button></a>
+  <a href="/search_movie"><button class="icon-button">Hae elokuvia <img src="/static/search-icon.png"></button></a>
   {% if session.user_id %}
-  <a href="/add_movie"><button>Lisää elokuva</button></a>
-  <a href="/logout"><button>Kirjaudu ulos</button></a>
+  <a href="/add_movie"><button class="icon-button">Lisää elokuva <img src="/static/add-icon.png"></button></a>
+  <a href="/logout"><button class="icon-button">Kirjaudu ulos <img src="/static/logout-icon.png"></button></a>
+  <a href="/user/{{ session.user_id }}"><div class="user-icon"></div></a>
   {% else %}
-  <a href="/login"><button>Kirjaudu sisään</button></a>
-  <a href="/register"><button>Luo tunnus</button></a><br>
+  <a href="/login"><button class="icon-button">Kirjaudu sisään <img src="/static/login-icon.png"></button></a>
+  <a href="/register"><button class="icon-button">Luo tunnus <img src="/static/register-icon.png"></button></a><br>
   {% endif %}
   </div>
   </div>

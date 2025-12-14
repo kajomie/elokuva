@@ -36,18 +36,22 @@ Elokuvan lisännyt <a href="/user/{{ movie.user_id }}">{{ movie.username }}</a>
 <div class="show-movie-second-container">
 <h3>Arvostelut</h3>
 <div class="review-container">
-    {% for review in reviews %}
-    <div class="review">
-    {{ review.review_text }}<br>
-    Arvosana: <b>{{ review.rating }}</b>. Elokuvan arvosteli <a href="/user/{{ review.user_id }}">{{ review.username }}</a>
-    {% if session.user_id == review.user_id %}
-    <div class="review-buttons">
-    <a href="/edit_review/{{ review.id }}"><button>Muokkaa arvostelua</button></a>
-    <a href="/remove_review/{{ review.id }}"><button>Poista arvostelu</button></a>
-    </div>
+    {% if reviews %}
+        {% for review in reviews %}
+        <div class="review">
+        {{ review.review_text }}<br>
+        Arvosana: <b>{{ review.rating }}</b>. Elokuvan arvosteli <a href="/user/{{ review.user_id }}">{{ review.username }}</a>
+        {% if session.user_id == review.user_id %}
+        <div class="review-buttons">
+        <a href="/edit_review/{{ review.id }}"><button>Muokkaa arvostelua</button></a>
+        <a href="/remove_review/{{ review.id }}"><button>Poista arvostelu</button></a>
+        </div>
+        {% endif %}
+        </div>
+        {% endfor %}
+    {% else %}
+        Elokuvalle ei ole vielä kirjoitettu yhtään arvostelua.
     {% endif %}
-    </div>
-    {% endfor %}
 </div>
 </div>
 <div class="add-review-container">
@@ -68,8 +72,6 @@ Elokuvan lisännyt <a href="/user/{{ movie.user_id }}">{{ movie.username }}</a>
 {% endif %}
 </div>
 <div class="back-to-index">
-<p>
 <a href="/">Takaisin etusivulle</a>
-</p>
 </div>
 {% endblock %}

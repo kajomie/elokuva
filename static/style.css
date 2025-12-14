@@ -9,24 +9,29 @@ body {
     min-height: 100vh;
     margin: 0;
     font-family: Helvetica, sans-serif;
-    background-color: #b6bec9;
+    background-color: #d6d6d6;
 }
 
 .header {
     display: flex;
     justify-content: space-between;
-    background-color: #495e79;
+    background-color: #7d1e2c;
     padding-left: 2em;
 }
 
+.header h1 {
+    padding-top: 0.5em;
+}
+
 .header a {
-    color: #fff;
+    color: #f5f3ff;
     text-decoration: none;
 }
 
 a {
     color: #c20000;
     text-decoration: none;
+    font-weight: bold;
 }
 
 a:hover, button:hover {
@@ -35,8 +40,8 @@ a:hover, button:hover {
 
 .header-links {
     display: flex;
-    list-style-type: none;
-    gap: 2em;
+    align-items: end;
+    gap: 1em;
     padding: 2em;
 }
 
@@ -59,31 +64,44 @@ a:hover, button:hover {
 }
 
 .second-container {
-    display: flex;
     padding: 1em;
     flex-grow: 1;
-    background-color: #a4aebc;
+    background-color: #c0c0c0;
+}
+
+.movie-first-container {
+    display: flex;
+    flex-grow: 1;
+    justify-content: center;
 }
 
 .movie-container {
     display: grid;
     grid-template-columns: auto auto auto auto;
-    background-color: #c8ced6;
-    border-radius: 15px;
+    background-color: #d6d6d6;
+    border-style: solid;
+    border-color: #9f2638;
     padding: 2em;
-    margin: 1.5em;
+    margin-bottom: 1em;
     gap: 1em;
 }
 
 .movie {
     padding: 2em;
+    background-color: #b42b3f;
     border-style: solid;
+    border-radius: 0.5em;
+    border-width: 0.35em;
     border-color: #9f2638;
-    border-radius: 15px;
+    font-weight: bold;
+}
+
+.movie a {
+    color: #f5f3ff;
 }
 
 .header-links button {
-    border-radius: 15px;
+    border-radius: 0.5em;
     border: none;
     padding: 0.5em 2em;
     font-size: 1em;
@@ -93,23 +111,25 @@ a:hover, button:hover {
 }
 
 button, input[type=submit] {
-    border-radius: 15px;
+    border-radius: 0.5em;
     border: none;
-    padding: 0.5em;
+    padding: 0.8em 1em;
     background-color: #b42b3f;
     color: #f5f3ff;
 }
 
 .footer {
     display: flex;
-    background-color: #455d7a;
+    background-color: #7d1e2c;
     padding: 2em;
-    color: #fff;
+    color: #f5f3ff;
     width: 100vw;
 }
 
 .info {
-    color: red;
+    color: #f5f3ff;
+    background-color: #7d1e2c;
+    padding-left: 2em;
 }
 
 .show-movie-first-container {
@@ -119,13 +139,17 @@ button, input[type=submit] {
     padding-left: 10em;
 }
 
-.show-movie-second-container {
+.show-movie-second-container, .user-second-container {
     display: flex;
     padding-left: 2em;
-    background-color: #a4aebc;
+    background-color: #c0c0c0;
 }
 
-.review-container {
+h2, h3, h4 {
+    color: #7d1e2c;
+}
+
+.review-container, .user-review-container {
     display: flex;
     flex-direction: column;
     padding-left: 2em;
@@ -134,12 +158,12 @@ button, input[type=submit] {
     gap: 1em;
 }
 
-.review {
+.review, .user-review {
     padding: 1.5em;
     border-style: solid;
     border-color: #9f2638;
-    border-radius: 15px;
-    background-color: #c8ced6;
+    border-radius: 0.5em;
+    background-color: #d6d6d6;
 }
 
 .review-buttons {
@@ -150,10 +174,38 @@ button, input[type=submit] {
 .add-review-container {
     padding-left: 10em;
     padding-bottom: 2em;
-    background-color: #a4aebc;
+    background-color: #c0c0c0;
+}
+
+.page-container, .search-first-container, .search-second-container, .user-first-container, .user-second-container {
+    padding-left: 2em;
+}
+
+.user-review {
+    margin: 0.5em;
+}
+
+.user-icon {
+    background: url("/static/user-icon.png");
+    height: 45px;
+    width: 45px;
+    margin-left: 0.5em;
+}
+
+button img {
+    height: 22px;
+    width: 22px;
+    margin-left: 0.5em;
+}
+
+.icon-button {
+    display: flex;
+    align-items: center;
 }
 
 .back-to-index {
-    padding-left: 10em;
-    background-color: #a4aebc;
+    padding-left: 2em;
+    padding-top: 2em;
+    padding-bottom: 2em;
+    background-color: #c0c0c0;
 }

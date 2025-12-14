@@ -28,12 +28,14 @@
 
 <div class="second-container">
 <h2>Elokuvat</h2>
+<div class="movie-first-container">
 <div class="movie-container">
   {% for movie in movies %}
 <div class="movie">
   <a href="/movie/{{ movie.id }}">{{ movie.title }} ({{ movie.release_date }})</a>
 </div>
   {% endfor %}
+</div>
 </div>
 </div>
 {% endblock %}

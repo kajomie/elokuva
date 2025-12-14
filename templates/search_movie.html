@@ -2,6 +2,7 @@
 {% block title %}Elokuvasovellus{% endblock %}
 {% block content %}
 
+<div class="search-first-container">
 <h2>Hae elokuvia</h2>
 <form action="/search_movie" method="get">
     <p>
@@ -11,19 +12,22 @@
     </p>
     <input type="submit" value="Tee haku">
 </form>
+</div>
 
+<div class="search-second-container">
 {% if query %}
 <br>
 <h2>Haun tulokset</h2>
 <p>Haulla '<i>{{ query }}</i>' löytyi yhteensä {{ res | length }} tulosta.</p>
-<ul>
+<div class="search-movie">
     {% for movie in res %}
-    <li><a href="/movie/{{ movie.id }}">{{ movie.title }} ({{ movie.release_date }}), dir. {{ movie.director }}</a></li>
+    <a href="/movie/{{ movie.id }}">{{ movie.title }} ({{ movie.release_date }}), dir. {{ movie.director }}</a><br>
     {% endfor %}
-</ul>
+</div>
 {% endif %}
 <p>
 <br>
 <a href="/">Takaisin etusivulle</a>
 </p>
+</div>
 {% endblock %}
