@@ -4,7 +4,7 @@
 
 <div class="page-container">
 <h2>Poista arvostelusi</h2>
-<p>Oletko varma, että haluat poistaa arvostelusi elokuvalle <b>{{ movie.title }} ({{ movie.release_date }})?</b></p>
+<p>Oletko varma, että haluat poistaa arvostelusi elokuvalle <a href="/movie/{{ movie.id }}">{{ movie.title }} ({{ movie.release_date }})</a>?</p>
 <p>Jos päätät poistaa arvostelun, päätöstä ei voi enää peruuttaa.</p>
 <form action="/remove_review/{{ review.id }}" method="post">
 <input type="hidden" name="movie_id" value="{{ movie.id }}" />

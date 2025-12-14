@@ -4,7 +4,7 @@
 
 <div class="page-container">
 <h2>Poista elokuva</h2>
-<p>Oletko varma, että haluat poistaa elokuvan <b>{{ movie.title }} ({{ movie.release_date }})?</b></p>
+<p>Oletko varma, että haluat poistaa elokuvan <a href="/movie/{{ movie.id }}">{{ movie.title }} ({{ movie.release_date }})</a>?</p>
 <p>Jos päätät poistaa elokuvan, päätöstä ei voi enää peruuttaa.</p>
 <form action="/remove_movie/{{ movie.id }}" method="post">
 <input type="hidden" name="movie_id" value="{{ movie.id }}" />

@@ -23,6 +23,7 @@ https://pixabay.com/photos/theatre-chairs-red-audience-4783908/
 Image by <a href="https://pixabay.com/users/sebastiangoessl-3360479/?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=4783908">Sebastian Gößl</a> from <a href="https://pixabay.com//?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=4783908">Pixabay</a>.<br>
 Image is free for use under the Pixabay Content License.
 <br>
+<br>
 Ikonit ovat peräisin Google Fontsista:<br>
 https://fonts.google.com/icons<br>
 Material Symbols are available under the Apache License Version 2.0.

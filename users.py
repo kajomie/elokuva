@@ -11,7 +11,7 @@ def get_movies(user_id):
     return db.query(sql, [user_id])
 
 def get_user_reviews(user_id):
-    sql = """SELECT reviews.rating, reviews.review_text, movies.title, movies.release_date
+    sql = """SELECT reviews.rating, reviews.review_text, movies.title, movies.release_date, reviews.movie_id
             FROM reviews, movies
             WHERE reviews.user_id = ? AND movies.id = reviews.movie_id"""
     return db.query(sql, [user_id])

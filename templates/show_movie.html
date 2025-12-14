@@ -3,7 +3,7 @@
 {% block content %}
 
 <div class="show-movie-first-container">
-<h2>{{ movie.title }}</h2>
+<h2>{{ movie.title }} ({{ movie.release_date }})</h2>
 {% if session.user_id == movie.user_id %}
 <p>
 <a href="/edit_movie/{{ movie.id }}"><button>Muokkaa elokuvan tietoja</button></a>
@@ -37,10 +37,11 @@ Elokuvan lisännyt <a href="/user/{{ movie.user_id }}">{{ movie.username }}</a>
 <h3>Arvostelut</h3>
 <div class="review-container">
     {% if reviews %}
+       <p>Elokuvalle on kirjoitettu {{ reviews | count }} arvostelua.</p>
         {% for review in reviews %}
-        <div class="review">
+        <div class="review"><p><b>Arvosana: {{ review.rating }}/5</b></p>
         {{ review.review_text }}<br>
-        Arvosana: <b>{{ review.rating }}</b>. Elokuvan arvosteli <a href="/user/{{ review.user_id }}">{{ review.username }}</a>
+        Elokuvan arvosteli <a href="/user/{{ review.user_id }}">{{ review.username }}</a>
         {% if session.user_id == review.user_id %}
         <div class="review-buttons">
         <a href="/edit_review/{{ review.id }}"><button>Muokkaa arvostelua</button></a>
@@ -58,9 +59,9 @@ Elokuvan lisännyt <a href="/user/{{ movie.user_id }}">{{ movie.username }}</a>
 {% if not review_check %}
     <h4>Lisää uusi arvostelu</h4>
     <form action="/create_review" method="post">
-    Anna arvosana (1-5):<br>
+    <b>Anna arvosana (1-5):</b><br>
     <input type="text" name="rating" size="6" pattern="^[1-5]$" required/><br><br>
-    Kirjoita arvostelu:<br>
+    <b>Kirjoita arvostelu:</b><br>
     <textarea name="review_text" rows="12" cols="50" maxlength="1000" required></textarea><br>
     <input type="hidden" name="movie_id" value="{{ movie.id }}">
     <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}" />

@@ -4,11 +4,11 @@
 
 <div class="page-container">
 <h2>Muokkaa arvostelua</h2>
-<p>Muokkaa arvosteluasi elokuvalle <b>{{ movie.title }} ({{ movie.release_date }})?</b></p>
+<p>Muokkaa arvosteluasi elokuvalle <a href="/movie/{{ movie.id }}">{{ movie.title }} ({{ movie.release_date }})</a>?</p>
     <form action="/update_review" method="post">
-    Anna arvosana (1-5):<br>
+    <b>Anna arvosana (1-5):</b><br>
     <input type="text" name="rating" size="6" pattern="^[1-5]$" value="{{ review.rating }}" required/><br><br>
-    Kirjoita arvostelu:<br>
+    <b>Kirjoita arvostelu:</b><br>
     <textarea name="review_text" rows="12" cols="50" maxlength="1000" required>{{ review.review_text }}</textarea><br>
     <input type="hidden" name="movie_id" value="{{ movie.id }}">
     <input type="hidden" name="review_id" value="{{ review.id }}">

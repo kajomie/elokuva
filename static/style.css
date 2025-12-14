@@ -127,9 +127,11 @@ button, input[type=submit] {
 }
 
 .info {
-    color: #f5f3ff;
-    background-color: #7d1e2c;
+    color: red;
+    background-color: transparent;
     padding-left: 2em;
+    padding-bottom: 2em;
+    padding-top: 2em;
 }
 
 .show-movie-first-container {
@@ -154,8 +156,11 @@ h2, h3, h4 {
     flex-direction: column;
     padding-left: 2em;
     padding-right: 2em;
+    gap: 0.5em;
+}
+
+.review-container {
     padding-top: 2em;
-    gap: 1em;
 }
 
 .review, .user-review {
@@ -164,6 +169,18 @@ h2, h3, h4 {
     border-color: #9f2638;
     border-radius: 0.5em;
     background-color: #d6d6d6;
+}
+
+.review-title-text {
+    font-size: large;
+    color: #7d1e2c;
+}
+
+.review p, .user-review p {
+    color: #7d1e2c;
+    padding-top: 0;
+    margin-top: 0;
+    margin-bottom: 0.2em;
 }
 
 .review-buttons {
@@ -190,6 +207,10 @@ h2, h3, h4 {
     height: 45px;
     width: 45px;
     margin-left: 0.5em;
+}
+
+.user-second-container {
+    flex-direction: column;
 }
 
 button img {

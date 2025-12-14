@@ -21,22 +21,19 @@ Käyttäjä on lisännyt {{ movies | count }} elokuvaa ja kirjoittanut {{ user_r
 </p>
 </div>
 <div class="user-second-container">
-<p>
 <h3>Arvostelut</h3>
 {% if user_reviews %}
 <div class="user-review-container">
     {% for review in user_reviews %}
     <div class="user-review">
-    <b>{{ review.title }} ({{ review.release_date }})</b>
-      <br>Arvosana: {{ review.rating }}/5
-      <br>{{ review.review_text }}
+    <p class="review-title-text"> <a href="/movie/{{ review.movie_id }}"><b>{{ review.title }} ({{ review.release_date }})</a></b></p>
+    <p><b>Arvosana: {{ review.rating }}/5</b></p>
+    {{ review.review_text }}
     </div>
     {% endfor %}
 </div>
-</p>
 {% else %}
-  Käyttäjä {{ user.username }} ei ole vielä kirjoittanut yhtään arvostelua.
-  <br>
+    Käyttäjä ei ole vielä kirjoittanut yhtään arvostelua.
 {% endif %}
 </div>
 <div class="back-to-index">
